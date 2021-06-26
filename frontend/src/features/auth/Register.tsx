@@ -1,7 +1,17 @@
 import AuthWrapper from "./components/Wrapper";
 import InputGroup from "./components/InputGroup";
+import { useMemo } from "react";
 
 const Register: React.FC = () => {
+  const subscriptionPlans = useMemo(
+    () => [
+      { label: "Gold", value: "gold" },
+      { label: "Pro", value: "pro" },
+      { label: "Basic", value: "basic" },
+    ],
+    []
+  );
+
   return (
     <AuthWrapper heading="Register">
       <div className="flex flex-wrap -mx-3 mb-6">
@@ -37,9 +47,13 @@ const Register: React.FC = () => {
               className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="subscription-plan"
             >
-              <option>Gold</option>
-              <option>Pro</option>
-              <option>Basic</option>
+              {subscriptionPlans.map((plan) => {
+                return (
+                  <option key={plan.value} value={plan.value}>
+                    {plan.label}
+                  </option>
+                );
+              })}
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               <svg
