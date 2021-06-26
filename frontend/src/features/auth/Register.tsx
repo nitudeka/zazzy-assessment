@@ -17,9 +17,10 @@ const Register: React.FC = () => {
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
   const [subPlan, setSubPlan] = useState("");
+  const [errors, setErrors] = useState<string[]>([]);
 
   return (
-    <AuthWrapper heading="Register">
+    <AuthWrapper errors={errors} heading="Register">
       <div className="flex flex-wrap -mx-3 mb-6">
         <InputGroup
           value={fName}
