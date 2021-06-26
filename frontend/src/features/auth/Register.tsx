@@ -1,6 +1,7 @@
 import AuthWrapper from "./components/Wrapper";
 import InputGroup from "./components/InputGroup";
 import { useMemo } from "react";
+import { useState } from "react";
 
 const Register: React.FC = () => {
   const subscriptionPlans = useMemo(
@@ -11,15 +12,34 @@ const Register: React.FC = () => {
     ],
     []
   );
+  const [fName, setFName] = useState("");
+  const [lName, setLName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confPassword, setConfPassword] = useState("");
+  const [subPlan, setSubPlan] = useState("");
 
   return (
     <AuthWrapper heading="Register">
       <div className="flex flex-wrap -mx-3 mb-6">
-        <InputGroup type="text" placeholder="First Name" label="First Name" />
-        <InputGroup type="text" placeholder="Last Name" label="Last Name" />
+        <InputGroup
+          value={fName}
+          onChange={setFName}
+          type="text"
+          placeholder="First Name"
+          label="First Name"
+        />
+        <InputGroup
+          value={lName}
+          onChange={setLName}
+          type="text"
+          placeholder="Last Name"
+          label="Last Name"
+        />
       </div>
       <div className="-mx-3 mb-6">
         <InputGroup
+          value={password}
+          onChange={setPassword}
           fullWidth
           type="password"
           placeholder="Password"
@@ -28,6 +48,8 @@ const Register: React.FC = () => {
       </div>
       <div className="-mx-3 mb-6">
         <InputGroup
+          value={confPassword}
+          onChange={setConfPassword}
           fullWidth
           type="password"
           placeholder="Confirm Password"
@@ -44,6 +66,8 @@ const Register: React.FC = () => {
           </label>
           <div className="relative">
             <select
+              value={subPlan}
+              onChange={({ target }) => setSubPlan(target.value)}
               className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="subscription-plan"
             >
