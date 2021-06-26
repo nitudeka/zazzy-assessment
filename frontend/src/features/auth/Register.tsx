@@ -1,7 +1,26 @@
 import AuthWrapper from "./components/Wrapper";
 import InputGroup from "./components/InputGroup";
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import { useState } from "react";
+
+const Chip: React.FC<{
+  label: string;
+  selected: boolean;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+}> = ({ label, selected, onClick }) => {
+  const cNames = [
+    selected
+      ? "bg-blue-500 text-white bg-opacity-80 border-blue-500"
+      : "text-gray-600",
+    "uppercase font-semibold cursor-pointer mr-4 text-sm py-1 rounded-2xl border-2 px-4",
+  ].join(" ");
+
+  return (
+    <div onClick={onClick} className={cNames}>
+      {label}
+    </div>
+  );
+};
 
 const Register: React.FC = () => {
   const subscriptionPlans = useMemo(
@@ -16,7 +35,7 @@ const Register: React.FC = () => {
   const [lName, setLName] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
-  const [subPlan, setSubPlan] = useState("");
+  const [subPlan, setSubPlan] = useState(subscriptionPlans[0].value);
   const [errors, setErrors] = useState<string[]>([]);
 
   return (
@@ -57,39 +76,19 @@ const Register: React.FC = () => {
           label="Confirm Password"
         />
       </div>
-      <div className="flex flex-wrap -mx-3 mb-2">
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="subscription-plan"
-          >
-            Subscription Plan
-          </label>
-          <div className="relative">
-            <select
-              value={subPlan}
-              onChange={({ target }) => setSubPlan(target.value)}
-              className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="subscription-plan"
-            >
-              {subscriptionPlans.map((plan) => {
-                return (
-                  <option key={plan.value} value={plan.value}>
-                    {plan.label}
-                  </option>
-                );
-              })}
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-              <svg
-                className="fill-current h-4 w-4"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-              >
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-              </svg>
-            </div>
-          </div>
+      <div>
+        <p className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+          Subscription Plan
+        </p>
+        <div className="flex">
+          {subscriptionPlans.map((plan) => (
+            <Chip
+              onClick={() => setSubPlan(plan.value)}
+              key={plan.value}
+              label={plan.label}
+              selected={plan.value === subPlan}
+            />
+          ))}
         </div>
       </div>
     </AuthWrapper>
