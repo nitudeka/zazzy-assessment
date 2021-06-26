@@ -3,16 +3,18 @@ interface IProps {
   placeholder: string;
   type?: string;
   id?: string;
+  fullWidth?: boolean;
 }
 
 const InputGroup: React.FC<IProps> = ({
   label,
   placeholder,
   id,
+  fullWidth,
   type = "text",
 }) => {
   return (
-    <div className="w-full md:w-1/2 px-3">
+    <div className={["w-full px-3", fullWidth ? "" : "md:w-1/2"].join(" ")}>
       <label
         className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
         htmlFor={id}
