@@ -1,9 +1,9 @@
-import Register from "./features/auth/Register";
+import Login from "./features/auth/Login";
 
 function App() {
   return (
     <div>
-      <Register />
+      <Login />
     </div>
   );
 }
