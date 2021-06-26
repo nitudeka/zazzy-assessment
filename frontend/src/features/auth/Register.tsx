@@ -31,8 +31,7 @@ const Register: React.FC = () => {
     ],
     []
   );
-  const [fName, setFName] = useState("");
-  const [lName, setLName] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
   const [subPlan, setSubPlan] = useState(subscriptionPlans[0].value);
@@ -40,37 +39,26 @@ const Register: React.FC = () => {
 
   return (
     <AuthWrapper errors={errors} heading="Register">
-      <div className="flex flex-wrap -mx-3 mb-6">
+      <div className="-mx-3 mb-6">
         <InputGroup
-          value={fName}
-          onChange={setFName}
-          type="text"
-          placeholder="First Name"
-          label="First Name"
-        />
-        <InputGroup
-          value={lName}
-          onChange={setLName}
-          type="text"
-          placeholder="Last Name"
-          label="Last Name"
+          fullWidth
+          value={username}
+          onChange={setUsername}
+          placeholder="Username"
+          label="Username"
         />
       </div>
-      <div className="-mx-3 mb-6">
+      <div className="flex flex-wrap -mx-3 mb-6">
         <InputGroup
           value={password}
           onChange={setPassword}
-          fullWidth
           type="password"
           placeholder="Password"
           label="Password"
         />
-      </div>
-      <div className="-mx-3 mb-6">
         <InputGroup
           value={confPassword}
           onChange={setConfPassword}
-          fullWidth
           type="password"
           placeholder="Confirm Password"
           label="Confirm Password"
