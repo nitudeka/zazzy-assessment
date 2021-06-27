@@ -1,11 +1,7 @@
-import Login from "./features/auth/Login";
+import Auth from "./features/auth/Auth";
 
 function App() {
-  return (
-    <div>
-      <Login />
-    </div>
-  );
+  return <Auth></Auth>;
 }
 
 export default App;
